@@ -9,23 +9,17 @@ string = ''
 while index > 0
   quotient = arabic_num / numbers[index]
   subtract_index = (index + 1)/2 -1
-  if (arabic_num % numbers[index])/numbers[subtract_index*2] == 9
-    string = string + symbols[subtract_index*2] + symbols[index]
-    puts "adding to string because there's a nine here!"
-      arabic_num = arabic_num%numbers[subtract_index*2]
-  elsif (arabic_num % numbers[index])/numbers[subtract_index*2] == 4
-    string = string + symbols[subtract_index*2] + symbols[index-1]
-    puts arabic_num
-    puts numbers[index]
-    puts numbers[subtract_index*2]
-    puts "adding to string because there's a four here!"
-      arabic_num = arabic_num%numbers[subtract_index*2]
-  elsif quotient != 0
+  if quotient != 0
     string = string + symbols[index]*quotient
     arabic_num = arabic_num - quotient*numbers[index]
   end
-
-
+  if (arabic_num % numbers[index])/numbers[subtract_index*2] == 9
+    string = string + symbols[subtract_index*2] + symbols[index]
+      arabic_num = arabic_num%numbers[subtract_index*2]
+  elsif (arabic_num % numbers[index])/numbers[subtract_index*2] == 4
+    string = string + symbols[subtract_index*2] + symbols[index-1]
+      arabic_num = arabic_num%numbers[subtract_index*2]
+  end
   index = index - 1
 end
 string = string + "I"*arabic_num
