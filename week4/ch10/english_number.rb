@@ -9,12 +9,43 @@ def english_number(number)
                   sixty seventy eighty ninety]
   teenagers = %w[eleven twelve thirteen
                  fourteen fifteen sixteen seventeen eighteen nineteen]
+  big_guns = %w[thousand million billion trillion quadrillion]
   # "left" is how much of the number
   # we still have left to write out.
   # "write" is the part we are
   # writing out right now.
   # write and left...get it? :)
   left = number
+
+  digits = left.to_s.length / 3
+  inc = digits - 1
+  while inc > 0
+    write = left / (1000 ** digits)
+    left -= write * (1000 ** digits)
+    if write > 0
+      # Now here's the recursion:
+      illions = english_number write
+      num_string = num_string + illions + ' ' + big_guns[inc]
+      if left > 0
+        # So we don't write 'two hundredfifty-one'...
+        num_string += ' '
+      end
+    end
+    inc = inc - 1
+  end
+
+  write = left / 1000 # How many thousands left?
+  left -= write * 1000 # Subtract off those thousands.
+  if write > 0
+    # Now here's the recursion:
+    thousands = english_number write
+    num_string = num_string + thousands + ' thousand'
+    if left > 0
+      # So we don't write 'two hundredfifty-one'...
+      num_string += ' '
+    end
+  end
+
   write = left / 100 # How many hundreds left?
   left -= write * 100 # Subtract off those hundreds.
   if write > 0
