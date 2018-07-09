@@ -40,4 +40,8 @@ def measure_shuffle_lots og_array
   sum / repeat
 end
 
-puts measure_shuffle_lots ar
+def better_shuffle array
+  return array.sort_by{rand}
+end
+puts measure_shuffle shuffle ar
+puts measure_shuffle better_shuffle ar

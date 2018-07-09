@@ -27,28 +27,24 @@ def recursive_sort unsorted_array, sorted_array
   recursive_sort temp, sorted_array
 end
 
-def reg_sort unsorted
+def reg_sort current
   sorted = []
-  while unsorted.length > 0
-    temp = []
-    inc = 1
-    min = unsorted[0]
-    sorted.push min
-    while inc < unsorted.length
-      if unsorted[inc] < min
-        unsorted.push sorted.pop
-        min = unsorted[inc]
-        sorted.push min
+  while current.length > 0
+    still_unsorted = []
+    min = current.pop
+    current.each do |test_word|
+      if test_word < min
+        current.push min
+        min = test_word
       else
-        temp.push unsorted[inc]
+        still_unsorted.push test_word
       end
-      inc = inc + 1
     end
-    unsorted = temp
+    sorted.push min
+    current = still_unsorted
   end
   sorted
 end
 
-puts sort dictionary
 # puts sort dictionary
-# puts reg_sort dictionary
+puts reg_sort dictionary
