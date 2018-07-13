@@ -3,7 +3,7 @@
 ###
 ### An example for mac could be '/Users/username/Desktop/pic_dst'
 ### An example for PC could be 'C:/Users/username/Desktop/pic_dst'
-Dir.chdir '<destination>'
+Dir.chdir '/Users/KevinGao/Desktop/screenshots/'
 
 # First we find all of the pictures to be moved.
 ### In the next line you want the source
@@ -12,7 +12,7 @@ Dir.chdir '<destination>'
 ###
 ### An example for mac could be '/Users/username/Desktop/pic_src/**/*.{JPG,jpg}'
 ### An example for PC could be 'C:/Users/username/Desktop/pic_src/**/*.{JPG,jpg}'
-pic_names = Dir['<source>']
+pic_names = Dir['/Users/KevinGao/Desktop/*.png']
 
 puts 'What would you like to call this batch?'
 batch_name = gets.chomp
@@ -24,9 +24,12 @@ pic_number = 1
 pic_names.each do |name|
   print '.' # This is our "progress bar".
   new_name = if pic_number < 10
-    "#{batch_name}0#{pic_number}.jpg"
+    "#{batch_name}0#{pic_number}.png"
   else
-    "#{batch_name}#{pic_number}.jpg"
+    "#{batch_name}#{pic_number}.png"
+  end
+  while File.exist? new_name
+    new_name = "#{new_name[0,new_name.length - 4]}a.png"
   end
 
   # Now where were we? Oh, yeah...
